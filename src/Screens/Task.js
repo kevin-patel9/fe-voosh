@@ -37,7 +37,7 @@ const TaskManagement = () => {
 
     const getTaskData = async (sorted) => {
         const response = await getAllTaskApi(sorted);
-        setTasks(response.tasks);
+        setTasks(response?.tasks);
     };
 
     const handleSortChange = async (event) => {
@@ -123,7 +123,7 @@ const TaskManagement = () => {
         <Droppable droppableId={droppableId} key={droppableId}>
             {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
-                    {tasks.map((item, index) => (
+                    {tasks?.map((item, index) => (
                         <Draggable key={item._id} draggableId={item._id} index={index}>
                             {(provided) => (
                                 <Paper
@@ -177,19 +177,19 @@ const TaskManagement = () => {
                     <Grid item xs={4}>
                         <Paper sx={{ padding: 2 }}>
                             <Typography variant="h5" align="center">TODO</Typography>
-                                {renderTasks('toComplete', tasks.toComplete)}
+                                {renderTasks('toComplete', tasks?.toComplete)}
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper sx={{ padding: 2 }}>
                             <Typography variant="h5" align="center">IN PROGRESS</Typography>
-                                {renderTasks('inProcess', tasks.inProcess)}
+                                {renderTasks('inProcess', tasks?.inProcess)}
                         </Paper>
                     </Grid>
                     <Grid item xs={4}>
                         <Paper sx={{ padding: 2 }}>
                             <Typography variant="h5" align="center">DONE</Typography>
-                                {renderTasks('done', tasks.done)}
+                                {renderTasks('done', tasks?.done)}
                         </Paper>
                     </Grid>
                 </Grid>
