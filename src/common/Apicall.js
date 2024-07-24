@@ -1,22 +1,13 @@
 export const commonEndPoint = "https://be-voosh.onrender.com";
 
-function getCookie(name) {
-    const cookieValue = document.cookie.match(
-      "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)"
-    );
-    return cookieValue ? cookieValue.pop() : "";
-  }
-
-export const postData = async (endPoint = '', data = {}, formData = false) => {
+export const postData = async (endPoint = '', data = {}) => {
     const url = commonEndPoint + endPoint;
-    const token = getCookie("token");
 
-    let headers = formData ? {} : {
+    let headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
     }
 
-    const value = formData ? data : JSON.stringify(data)
+    const value = JSON.stringify(data)
 
     try {
         let response = {};
@@ -24,7 +15,6 @@ export const postData = async (endPoint = '', data = {}, formData = false) => {
             headers,
             body: value,
             method: 'POST',
-            credentials: "include"
         });
         return response.json();
     } catch (e) {
@@ -34,18 +24,15 @@ export const postData = async (endPoint = '', data = {}, formData = false) => {
 
 export const getData = async (endPoint = '') => {
     const url = commonEndPoint + endPoint;
-    const token = getCookie("token");
 
     let headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
     }
 
     try {
         const response = await fetch(url, {
             method: 'GET',
             headers,
-            credentials: "include"
         });
         return response.json();
     } catch (e) {
@@ -65,7 +52,6 @@ export const deleteData = async (endPoint = '', data = {}) => {
             method: 'DELETE',
             headers,
             body: JSON.stringify(data),
-            credentials: "include"
         });
         return response.json();
     } catch (e) {
