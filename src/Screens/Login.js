@@ -40,6 +40,7 @@ const Login = () => {
       return;
     }
 
+    localStorage.setItem("token", response?.token);
     setIsLoggedIn(true);
     navigate("/task")
   };
