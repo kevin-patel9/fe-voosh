@@ -22,19 +22,6 @@ const TaskManagement = () => {
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [newTaskDescription, setNewTaskDescription] = useState('');
 
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        function getCookie(name) {
-            const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
-            return cookieValue ? cookieValue.pop() : "";
-        }
-
-        if (getCookie("token") == "")
-            navigate("/");
-    }, []);    
-
     const getTaskData = async (sorted) => {
         const response = await getAllTaskApi(sorted);
         setTasks(response?.tasks);
