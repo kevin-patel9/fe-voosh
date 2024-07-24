@@ -1,13 +1,13 @@
 export const commonEndPoint = "https://be-voosh.onrender.com";
 
-export const postData = async (endPoint = '', data = {}) => {
+export const postData = async (endPoint = '', data = {}, formData = false) => {
     const url = commonEndPoint + endPoint;
 
-    let headers = {
-        'Content-Type': 'application/json',
+    let headers = formData ? {} : {
+        'Content-Type': 'application/json'
     }
 
-    const value = JSON.stringify(data)
+    const value = formData ? data : JSON.stringify(data)
 
     try {
         let response = {};
@@ -15,6 +15,7 @@ export const postData = async (endPoint = '', data = {}) => {
             headers,
             body: value,
             method: 'POST',
+            credentials: "include"
         });
         return response.json();
     } catch (e) {
@@ -24,15 +25,10 @@ export const postData = async (endPoint = '', data = {}) => {
 
 export const getData = async (endPoint = '') => {
     const url = commonEndPoint + endPoint;
-
-    let headers = {
-        'Content-Type': 'application/json',
-    }
-
     try {
         const response = await fetch(url, {
             method: 'GET',
-            headers,
+            credentials: "include"
         });
         return response.json();
     } catch (e) {
@@ -52,6 +48,7 @@ export const deleteData = async (endPoint = '', data = {}) => {
             method: 'DELETE',
             headers,
             body: JSON.stringify(data),
+            credentials: "include"
         });
         return response.json();
     } catch (e) {
