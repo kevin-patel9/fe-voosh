@@ -101,7 +101,7 @@ const Login = () => {
               <Box marginTop={2} textAlign="center">
                 <Typography variant="body2">
                   Don't have an account?{' '}
-                  <Link href="/signUp" variant="body2">
+                  <Link href="/signup" variant="body2">
                     Signup
                   </Link>
                 </Typography>
