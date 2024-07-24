@@ -1,4 +1,4 @@
-export const commonEndPoint = "http://localhost:5000";
+export const commonEndPoint = "https://be-voosh.onrender.com";
 
 export const postData = async (endPoint = '', data = {}, formData = false) => {
     const url = commonEndPoint + endPoint;
