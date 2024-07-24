@@ -8,7 +8,7 @@ import { UserAuthContext } from '../App';
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const { setIsLoggedIn } = useContext(UserAuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserAuthContext);
   
   const navigate = useNavigate();
   
@@ -41,7 +41,7 @@ const Login = () => {
     }
 
     localStorage.setItem("token", response?.token);
-    setIsLoggedIn(true);
+    setIsLoggedIn(!isLoggedIn);
     navigate("/task")
   };
 

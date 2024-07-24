@@ -5,12 +5,17 @@ import { UserAuthContext } from '../App';
 
 const Navbar = () => {
     const [refetch, setRefetch] = useState(false);
+    const [ isLogged, setIsLogged ] = useState(localStorage.getItem("token"));
     const { isLoggedIn, setIsLoggedIn } = useContext(UserAuthContext);
 
-    const deleteCookie = (name) => {
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-        setIsLoggedIn(false);
+    const deleteToken = () => {
+        localStorage.removeItem("token");
+        setIsLogged("");
     };
+
+    useEffect(() => {
+      setIsLogged(localStorage.getItem("token"));
+    },[isLoggedIn])
 
     const handleRefetch = () => {
         setRefetch(!refetch);
@@ -22,14 +27,14 @@ const Navbar = () => {
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Task Management
         </Typography>
-        {!isLoggedIn ? 
+        {!isLogged ? 
             <>
             <Button color="inherit" onClick={handleRefetch} component={Link} to="/">Login</Button>
             <Button color="inherit" component={Link} to="/signup">Signup</Button>
             </>
             :
             <Button onClick={() => {
-                deleteCookie("token");
+                deleteToken();
                 handleRefetch();
             }} color="inherit" component={Link} to="/">
                 Logout

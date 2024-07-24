@@ -13,11 +13,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    function getCookie(name) {
-        const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
-        return cookieValue ? cookieValue.pop() : "";
+    function getToken() {
+      return localStorage.getItem("token");
     }
-    setIsLoggedIn(getCookie("token") !== "");
+    setIsLoggedIn(getToken() !== "");
   }, [isLoggedIn]);
 
   return (
