@@ -11,16 +11,6 @@ const Login = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserAuthContext);
   
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    function getCookie(name) {
-        const cookieValue = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
-        return cookieValue ? cookieValue.pop() : "";
-    }
-
-    if (getCookie("token") != "")
-        navigate("/task");
-  }, []);  
 
   const initialValues = {
     userID: '',
@@ -41,8 +31,8 @@ const Login = () => {
     }
 
     localStorage.setItem("token", response?.token);
+    navigate("/task");
     setIsLoggedIn(!isLoggedIn);
-    navigate("/task")
   };
 
   return (
