@@ -32,7 +32,7 @@ const Login = () => {
 
     localStorage.setItem("token", response?.token);
     navigate("/task");
-    setIsLoggedIn(!isLoggedIn);
+    setIsLoggedIn(false);
   };
 
   return (
