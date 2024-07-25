@@ -11,6 +11,7 @@ const Navbar = () => {
     const deleteToken = () => {
         localStorage.removeItem("token");
         setIsLogged("");
+        setIsLoggedIn(false);
     };
 
     useEffect(() => {
