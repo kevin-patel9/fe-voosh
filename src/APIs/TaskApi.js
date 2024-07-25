@@ -1,8 +1,7 @@
 import { postData, getData, deleteData } from "../common/Apicall";
 
-const token = localStorage.getItem("token");
-
 export const createTaskApi = async (title, description) => {
+    const token = localStorage.getItem("token");
     return await postData("/api/v1/task/createTask", {title, description, token});
 };
 
@@ -15,6 +14,7 @@ export const updateTaskTypeApi = async (taskId, taskType) => {
 };
 
 export const getAllTaskApi = async (sorted) => {
+    const token = localStorage.getItem("token");
     return await getData(`/api/v1/task/getAllTask/${sorted}/${token}`);
 };
 
