@@ -38,8 +38,9 @@ const TaskManagement = () => {
     };
 
     useEffect(() => {
-        getTaskData(false);
-    }, [refresh, isLoggedIn]);
+      if (isLoggedIn)
+          getTaskData(false);
+    }, [isLoggedIn]);
 
     const handleCreateTask = async () => {
         await createTaskApi(newTaskTitle, newTaskDescription);
