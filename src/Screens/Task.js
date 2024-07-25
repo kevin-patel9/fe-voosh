@@ -5,10 +5,12 @@ import { dayConvert } from '../components/TimeConvert';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { UserAuthContext } from '../App';
 
 const TaskManagement = () => {
     const [tasks, setTasks] = useState({ toComplete: [], inProcess: [], done: [] });
     const [refresh, setRefresh] = useState(false);
+    const { isLoggedIn } = useContext(UserAuthContext);
     const [sortOption, setSortOption] = useState('recent');
     // delete task state
     const [deleteMessage, setDeleteMessage] = useState("");
@@ -37,7 +39,7 @@ const TaskManagement = () => {
 
     useEffect(() => {
         getTaskData(false);
-    }, [refresh]);
+    }, [refresh, isLoggedIn]);
 
     const handleCreateTask = async () => {
         await createTaskApi(newTaskTitle, newTaskDescription);
